@@ -1,0 +1,9 @@
+google-generativeai
+fastapi
+uvicorn
+langchain-community
+google-cloud-aiplatform
+unstructured
+langchain
+jinja2
+streamlit
