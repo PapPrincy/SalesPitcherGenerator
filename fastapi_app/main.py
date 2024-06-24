@@ -19,7 +19,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = FastAPI(debug=True)
 
-genai.configure(api_key="AIzaSyDgZ4sQGPEDDknv3d9SQuFwLSfynAqFjYk")
+genai.configure(api_key="GOOGLE API KEY")
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 templates = Jinja2Templates(directory="templates")
