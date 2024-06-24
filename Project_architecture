@@ -1,0 +1,16 @@
+Project architecture:
+project/
+│
+├── fastapi_app/
+│   ├── main.py                   # Main FastAPI application
+│   ├── templates/                # HTML templates directory
+│   │   ├── input_form.html       # Input form template
+│   │   └── output.html           # Output template
+│   └── .venv                     #virtual environment
+    │ ├── requirements.txt              # Python dependencies
+    │ ├── README.md                     # Project documentation
+│   └── run.txt                        # Script to run the FastAPI application
+│
+├── streamlit_app
+      ├── myapp.py
+      ├──  how_to_run_streamlit
