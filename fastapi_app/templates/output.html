@@ -7,42 +7,44 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
+            background-color: #f0f0f0;
             margin: 20px;
-            padding: 0;
         }
         .container {
-            max-width: 800px;
+            max-width: 600px;
             margin: auto;
-        }
-        h1 {
-            color:blue;
-            text-align: center;
-        }
-        .output-content {
             background-color: #f9f9f9;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
         }
-        .output-content p {
-            font-size: 16px;
-            line-height: 1.8;
-            margin: 0;
+        h1 {
+            text-align: center;
+            color: blue;
         }
-        
-        
+        .content-section {
+            background-color: #ffffff;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .content-section h2 {
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Sales Pitch and Email Output</h1>
-        </header>
-        <section class="output-content">
-            <p>{{ sales_pitch_and_email | safe }}</p>
-        </section>
+        <h1>Sales Pitch and Email Output</h1>
+        <div class="content-section">
+            <h2>Sales Pitch</h2>
+            <p>{{ sales_pitch | safe }}</p>
+        </div>
+        <div class="content-section">
+            <h2>Email Content</h2>
+            <p>{{ email_content | safe }}</p>
+        </div>
     </div>
 </body>
 </html>
