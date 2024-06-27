@@ -19,8 +19,6 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = FastAPI(debug=True)
 
-genai.configure(api_key="GOOGLE API KEY")
-model = genai.GenerativeModel('gemini-1.5-flash')
 
 templates = Jinja2Templates(directory="templates")
 jinja_env = Environment(loader=FileSystemLoader('templates'))
@@ -39,22 +37,26 @@ async def generate_sales_pitch_and_email_endpoint(request: Request):
      try:
         data = await request.form()
         url = data.get("url")
+        api_key=data.get("api_key")
      except Exception as e:
        logging.error(f"Error parsing request body: {e}")
-       url = ""
+       return JSONResponse(content={"error": "Invalid request body"}, status_code=400)
 
      if not url:
-         return JSONResponse(content={"error": "Invalid request body"}, status_code=400)
-
-     sales_pitch,email_content = generate_sales_pitch_and_email(url)
+         return JSONResponse(content={"error": "URL not provided"}, status_code=400)
+     
+     sales_pitch,email_content = generate_sales_pitch_and_email(url,api_key)
 
      logging.debug(f"Generated sales pitch : {sales_pitch}")
      logging.debug(f"Generated email content: {email_content}")
 
      return templates.TemplateResponse("output.html", {"request": request, "sales_pitch": sales_pitch, "email_content": email_content})
 
-def generate_sales_pitch_and_email(url):
+def generate_sales_pitch_and_email(url,api_key):
      logging.debug(f"Generating sales pitch and email for URL: {url}")
+     genai.configure(api_key=api_key)
+     model = genai.GenerativeModel('gemini-1.5-flash')
+
      try:
          loader = UnstructuredURLLoader(urls=[url], mode="elements", post_processors=[clean, remove_punctuation, clean_extra_whitespace])
          elements = loader.load()
